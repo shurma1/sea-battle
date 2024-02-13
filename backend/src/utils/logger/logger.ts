@@ -21,75 +21,75 @@ export enum LogTypes {
 
 
 const LogColors = {
-    [LogTypes.None]: LOGGER_STYLES.reset,
-    [LogTypes.Error]: LOGGER_STYLES.red,
-    [LogTypes.Warning]: LOGGER_STYLES.yellow,
-    [LogTypes.Log]: LOGGER_STYLES.blue,
-    [LogTypes.Debug]: LOGGER_STYLES.green
+	[LogTypes.None]: LOGGER_STYLES.reset,
+	[LogTypes.Error]: LOGGER_STYLES.red,
+	[LogTypes.Warning]: LOGGER_STYLES.yellow,
+	[LogTypes.Log]: LOGGER_STYLES.blue,
+	[LogTypes.Debug]: LOGGER_STYLES.green
 };
 
 
 
 export class Logger {
-    //eslint-disable-next-line @typescript-eslint/no-explicit-any
-    static debug(...message: any){
-        if(! this.isDevelopment()) return;
-        if(! this.checkLoggingLevel(LogTypes.Debug)) return;
-        console.log(this.addPrefix(LogTypes.Debug), ...message);
-    }
-    //eslint-disable-next-line @typescript-eslint/no-explicit-any
-    static log(...message: any){
-        if(! this.isDevelopment()) return;
-        if(! this.checkLoggingLevel(LogTypes.Log)) return;
-        console.log(this.addPrefix(LogTypes.Log), ...message);
-    }
-    //eslint-disable-next-line @typescript-eslint/no-explicit-any
-    static warn(...message: any){
-        if(! this.isDevelopment()) return;
-        if(! this.checkLoggingLevel(LogTypes.Warning)) return;
-        console.log(this.addPrefix(LogTypes.Warning), ...message);
-    }
-    //eslint-disable-next-line @typescript-eslint/no-explicit-any
-    static error(...message: any){
-        if(! this.isDevelopment()) return;
-        if(! this.checkLoggingLevel(LogTypes.Error)) return;
-        console.log(this.addPrefix(LogTypes.Error), ...message);
-    }
+	//eslint-disable-next-line @typescript-eslint/no-explicit-any
+	static debug(...message: any){
+		if(! this.isDevelopment()) return;
+		if(! this.checkLoggingLevel(LogTypes.Debug)) return;
+		console.log(this.addPrefix(LogTypes.Debug), ...message);
+	}
+	//eslint-disable-next-line @typescript-eslint/no-explicit-any
+	static log(...message: any){
+		if(! this.isDevelopment()) return;
+		if(! this.checkLoggingLevel(LogTypes.Log)) return;
+		console.log(this.addPrefix(LogTypes.Log), ...message);
+	}
+	//eslint-disable-next-line @typescript-eslint/no-explicit-any
+	static warn(...message: any){
+		if(! this.isDevelopment()) return;
+		if(! this.checkLoggingLevel(LogTypes.Warning)) return;
+		console.log(this.addPrefix(LogTypes.Warning), ...message);
+	}
+	//eslint-disable-next-line @typescript-eslint/no-explicit-any
+	static error(...message: any){
+		if(! this.isDevelopment()) return;
+		if(! this.checkLoggingLevel(LogTypes.Error)) return;
+		console.log(this.addPrefix(LogTypes.Error), ...message);
+	}
 
 
-    private static isDevelopment(){
-        return !!process.argv.includes('--development');
-    }
-    private static getPrefix(logType: LogTypes): string {
-        for (const key in LogTypes) {
-            if (key === logType.toString()) {
-                return LogTypes[key];
-            }
-        }
-        return 'null';
-    }
+	private static isDevelopment(){
+		return !!process.argv.includes('--development');
+	}
+	private static getPrefix(logType: LogTypes): string {
+		for (const key in LogTypes) {
+			if (key === logType.toString()) {
+				return LogTypes[key];
+			}
+		}
+		return 'null';
+	}
 
-    private static addTime(message: string): string {
-        const date = new Date();
-        const hours = String(date.getHours()).padStart(2, '0');
-        const minutes = String(date.getMinutes()).padStart(2, '0');
-        const seconds = String(date.getSeconds()).padStart(2, '0');
+	private static addTime(message: string): string {
+		const date = new Date();
+		const hours = String(date.getHours()).padStart(2, '0');
+		const minutes = String(date.getMinutes()).padStart(2, '0');
+		const seconds = String(date.getSeconds()).padStart(2, '0');
 
-        return `[${hours}:${minutes}:${seconds}] ${message}`;
-    }
+		return `[${hours}:${minutes}:${seconds}] ${message}`;
+	}
 
-    private static addPrefix(logType: LogTypes): string {
-        const prefix = this.getPrefix(logType);
-        const styledPrefix = this.getStyledText(prefix, LogColors[logType]);
-        return this.addTime(`[${styledPrefix}]`);
-    }
+	private static addPrefix(logType: LogTypes): string {
+		const prefix = this.getPrefix(logType);
+		const styledPrefix = this.getStyledText(prefix, LogColors[logType]);
+		return this.addTime(`[${styledPrefix}]`);
+	}
 
-    private static getStyledText(text: string, color: string): string {
-        return `${color}${text}${LOGGER_STYLES.reset}`;
-    }
+	private static getStyledText(text: string, color: string): string {
+		return `${color}${text}${LOGGER_STYLES.reset}`;
+	}
 
-    private static checkLoggingLevel(loggingLevel: LogTypes): boolean {
-        const environmentLoggingLevel: LogTypes = +(process.env.LOGGING_LEVEL || 0);
-        return loggingLevel <= environmentLoggingLevel;
-    }
+	private static checkLoggingLevel(loggingLevel: LogTypes): boolean {
+		const environmentLoggingLevel: LogTypes = +(process.env.LOGGING_LEVEL || 0);
+		return loggingLevel <= environmentLoggingLevel;
+	}
 }
