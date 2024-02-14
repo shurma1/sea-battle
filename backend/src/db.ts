@@ -7,6 +7,7 @@ export default new Sequelize(
 	{
 		dialect: 'postgres',
 		host: process.env.DB_HOST,
-		port: parseInt(process.env.DB_PORT)
+		port: parseInt(process.env.DB_PORT),
+		logging: process.env.DB_LOGGING.toLowerCase() === 'true'
 	}
 );
