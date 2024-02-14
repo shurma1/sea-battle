@@ -1,7 +1,8 @@
 import express from 'express';
+import PlayerController from '../controllers/player.constroller';
 
 const router = express.Router();
 
-router.get('/', (req, res) => res.send('ok'));
+router.post('/registration', PlayerController.registration);
 
 export default router;
