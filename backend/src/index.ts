@@ -6,8 +6,8 @@ import express, {Application} from 'express';
 import router from './routes';
 import sequelize from './db';
 import cors from 'cors';
-import ErrorHandlingMiddleware from './middleware/ErrorHandling.middleware';
-//import * as models from './models/models';
+import {errorHandlingMiddleware} from './middleware/ErrorHandling.middleware';
+import {fallbackController} from './controllers';
 
 const PORT = process.env.PORT || 8000;
 
@@ -17,7 +17,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 app.use(router);
-app.use(ErrorHandlingMiddleware);
+app.use(fallbackController);
+app.use(errorHandlingMiddleware);
 
 const start = async () => {
 	try{
