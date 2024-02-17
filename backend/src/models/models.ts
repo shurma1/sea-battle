@@ -9,44 +9,44 @@ import {ShipInstance} from './types/Ship';
 
 
 
-const Player = sequelize.define<PlayerInstance>('Player', {
+const Player = sequelize.define<PlayerInstance>('player', {
 	id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 	email: {type: DataTypes.STRING, unique: true},
 	password: {type: DataTypes.STRING},
 	mmr: {type: DataTypes.FLOAT, defaultValue: 0.00}
 });
 
-const Token = sequelize.define<TokenInstance>('Token', {
+const Token = sequelize.define<TokenInstance>('token', {
 	id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 	//created add auto
 	token: {type: DataTypes.STRING}
 });
 
-const Match = sequelize.define<MatchInstance>('Match', {
+const Match = sequelize.define<MatchInstance>('match', {
 	id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 	//created add auto
 	ended: {type: 'TIMESTAMP'}
 });
 
 
-const Move = sequelize.define<MoveInstance>('Move', {
+const Move = sequelize.define<MoveInstance>('move', {
 	id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 	coordinate: {type: DataTypes.STRING},
 	isHit: {type: DataTypes.BOOLEAN}
 });
 
 
-const Participant = sequelize.define<ParticipantInstance>('Participant', {
+const Participant = sequelize.define<ParticipantInstance>('participant', {
 	id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 	isWin: {type: DataTypes.BOOLEAN}
 });
 
-const Ship = sequelize.define<ShipInstance>('Ship', {
+const Ship = sequelize.define<ShipInstance>('ship', {
 	id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 	coordinate: {type: DataTypes.STRING},
 });
 
-const UserToMatch = sequelize.define('UserToMatch', {
+const UserToMatch = sequelize.define('user_to_match', {
 	id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 });
 
