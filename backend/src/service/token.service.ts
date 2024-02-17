@@ -1,32 +1,45 @@
 import jwt from 'jsonwebtoken';
 import {Token} from '../models/models';
+import {ApiError} from '../error/ApiError';
+
+
+interface IPayload {
+	id: number;
+}
+
+
 class TokenService{
-	generateTokens(payload: string | object | Buffer){
+	generateTokens(payload: IPayload | object | Buffer){
 		const accessToken = jwt.sign(
 			payload,
 			process.env.JWT_ACCESS_SECRET,
 			{
-				expiresIn: '1h'
+				expiresIn: process.env.JWT_ACCESS_EXPIRES
 			});
 
 		const refreshToken = jwt.sign(
 			payload,
 			process.env.JWT_REFRESH_SECRET,
 			{
-				expiresIn: '30d'
+				expiresIn: process.env.JWT_REFRESH_EXPIRES
 			});
 
 		return{
-			accessToken,
-			refreshToken
+			access_token: accessToken,
+			refresh_token: refreshToken
 		};
 	}
 
 	async saveToken(playerId: number, refreshToken: string) {
 		const token = await Token.create({
 			token: refreshToken,
-			PlayerId: playerId
+			playerId: playerId
 		});
+
+		if(! token){
+			throw ApiError.badRequest('Something went wrong');
+		}
+
 		return token;
 	}
 
@@ -37,7 +50,7 @@ class TokenService{
 
 	validateAccessToken(token: string){
 		try{
-			const payload = jwt.verify(token, process.env.JWT_ACCESS_SECRET);
+			const payload = jwt.verify(token, process.env.JWT_ACCESS_SECRET) as IPayload;
 			return payload;
 		}
 		catch {
@@ -47,7 +60,7 @@ class TokenService{
 
 	validateRefreshToken(token: string){
 		try{
-			const payload = jwt.verify(token, process.env.JWT_REFRESH_SECRET);
+			const payload = jwt.verify(token, process.env.JWT_REFRESH_SECRET) as IPayload;
 			const isTokenExists = !!Token.findOne({where: {token}});
 			if(! isTokenExists){
 				throw new Error('Token not found');
