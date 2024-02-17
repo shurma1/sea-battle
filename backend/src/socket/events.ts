@@ -1,0 +1,10 @@
+
+
+export const enum SocketEvents {
+	FIND_GAME = 'FIND_GAME',
+	JOIN_GAME = 'JOIN_GAME',
+	LEAVE_GAME = 'LEAVE_GAME',
+	MAKE_MOVE = 'MAKE_MOVE',
+
+	MATCH_FOUND = 'MATCH_FOUND'
+}
