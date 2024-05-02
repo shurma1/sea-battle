@@ -3,15 +3,19 @@ import config from 'config';
 import http from 'http';
 import https from 'https';
 import expressWs from 'express-ws';
-import {ErrorHandlingMiddleware} from "./src/middleware/ErrorHandling.middleware";
 import {socket} from "./src/socket";
+import Router from "./src/routes";
+import path from "node:path";
 
+export const ROOT_DIR = path.resolve(__dirname);
 
 const expressApp = express();
 
 const {app} = expressWs(expressApp);
 
 app.use(express.json());
+
+app.use('/', Router)
 
 app.ws('/', socket);
 
