@@ -1,22 +1,27 @@
 import {WebSocket} from 'ws';
-import {generateName} from '../utils/generateName';
-import {generateColor} from '../utils/generateColor';
-import { v4 as uuidv4 } from 'uuid';
+import {Player} from "../types/Player";
 
-export class Player {
+export class PlayerDTO implements Player{
 	public id: string;
 	public name: string;
 	public avatar: string;
 	public color: string;
+	public matchId: null | string;
 	public ws: WebSocket;
 
-	constructor(ws: WebSocket) {
-		const {name, icon} = generateName();
+	constructor(
+		ws: WebSocket,
+		name: string,
+		avatar: string,
+		color: string,
+		id: string
+	) {
 		this.ws = ws;
 		this.name = name;
-		this.avatar = icon;
-		this.color = generateColor();
-		this.id = uuidv4();
+		this.avatar = avatar;
+		this.color = color;
+		this.id = id;
+		this.matchId = null;
 	}
 
 }
