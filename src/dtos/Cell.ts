@@ -1,6 +1,7 @@
+import {Cell} from "../types/Cell";
 
 
-export class Cell {
+export class CellDTO implements Cell {
 	x: number;
 	y: number;
 	hit: boolean = false;
@@ -10,13 +11,4 @@ export class Cell {
 		this.x = x;
 		this.y = y;
 	}
-
-	public Hit(){
-		this.hit = true;
-	}
-
-	public Shot(){
-		this.hit = true;
-	}
-
 }
