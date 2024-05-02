@@ -4,8 +4,8 @@ import {Gender} from '../../types/Gender';
 
 
 export const generateName = () => {
-	const a = Math.floor(Math.random() * nameData.length);
-	const b = Math.floor(Math.random() * descriptionData.length);
+	const a = Math.floor(Math.random() * nameData.length-1);
+	const b = Math.floor(Math.random() * descriptionData.length-1);
 	const {
 		icon,
 		name,

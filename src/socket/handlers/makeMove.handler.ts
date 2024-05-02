@@ -5,6 +5,7 @@ import GameService from "../../services/game.service";
 import WSError from "../../error/WSError";
 import {AnswerType} from "../../types/AnswerType";
 import {updatePlayer} from "../../store/slices/player.slice";
+import {generateEffect} from "../../utils/generateEffect";
 
 export const MakeMoveHandler = (hit: Cell, ws: WebSocket) => {
     const player = PlayerService.getByWS(ws);
@@ -43,22 +44,6 @@ export const MakeMoveHandler = (hit: Cell, ws: WebSocket) => {
         }
     }
 
-    if(isEnd) {
-        [player, enemy.player].forEach((playerData, i) => {
-            playerData.ws.send(
-                JSON.stringify({
-                    type: AnswerType.GameEnded,
-                    data: {
-                        win: playerData === player,
-                    }
-                })
-            )
-
-            GameService.endGame(game);
-        })
-        return;
-    }
-
     [player, enemy.player].forEach((playerData, i) => {
         playerData.ws.send(
             JSON.stringify({
@@ -73,8 +58,21 @@ export const MakeMoveHandler = (hit: Cell, ws: WebSocket) => {
         )
     })
 
+    if(isEnd) {
+        const effect = generateEffect();
+        [player, enemy.player].forEach((playerData, i) => {
+            playerData.ws.send(
+                JSON.stringify({
+                    type: AnswerType.GameEnded,
+                    effect,
+                    data: {
+                        win: playerData === player,
+                    }
+                })
+            )
 
-
-
-
+            GameService.endGame(game);
+        })
+        return;
+    }
 }
