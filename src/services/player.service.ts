@@ -25,7 +25,8 @@ class PlayerService {
             id: player.id,
             avatar: player.avatar,
             name: player.name,
-            color: player.color,
+            primaryColor: player.primaryColor,
+            secondaryColor: player.secondaryColor,
             matchId: player.matchId
         }
     }
@@ -60,11 +61,13 @@ class PlayerService {
 
     private createPlayer(ws: WebSocket) {
         const {name, icon} = generateName();
+        const [primaryColor, secondaryColor] = generateColor()
         return new PlayerDTO(
             ws,
             name,
             icon,
-            generateColor(),
+            primaryColor,
+            secondaryColor,
             uuidv4()
         );
     }
