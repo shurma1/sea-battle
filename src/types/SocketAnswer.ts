@@ -1,7 +1,7 @@
-import {Answer} from './Answer';
+import {AnswerType} from './AnswerType';
 
 
 export interface SocketAnswer<T> {
-	type: Answer;
+	type: AnswerType;
 	data: T;
 }

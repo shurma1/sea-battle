@@ -1,5 +1,7 @@
+import {RequestType} from "./RequestType";
+
 
 export interface SocketRequest<T> {
-	type: Request;
+	type: RequestType;
 	data: T;
 }
