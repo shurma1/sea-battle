@@ -1,18 +1,19 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {Action} from '../types/Action';
-import {Player} from '../../dtos/Player';
+import {PlayerDTO} from '../../dtos/Player';
+import {PlayerToGameDto} from "../../dtos/PlayerToGame";
 
 
 const waitingList = createSlice({
 	name: 'WAITING_LIST',
-	initialState: [] as Player[],
+	initialState: [] as PlayerToGameDto[],
 	reducers: {
-		addPlayerInWaitingList: (state, action: Action<Player>) => {
+		addPlayerInWaitingList: (state, action: Action<PlayerToGameDto>) => {
 			state.push(action.payload);
 		},
-		removePlayerFromWaitingList: (state, action: Action<Pick<Player, 'ws'>>) => {
+		removePlayerFromWaitingList: (state, action: Action<string>) => {
 			return state.filter(
-				player => player.ws !== action.payload.ws);
+				player => player.player.id !== action.payload);
 		},
 	}
 });

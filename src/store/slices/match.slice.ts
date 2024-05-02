@@ -1,35 +1,21 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {Action} from '../types/Action';
-import {Player} from '../../dtos/Player';
-import {Cell} from '../../dtos/Cell';
-import {Ship} from '../../dtos/Ship';
+import {GameDTO} from "../../dtos/Game";
 
 
-interface IPlayers extends Player{
-	timerId: NodeJS.Timeout | undefined;
-	filed: Cell[];
-	ships: Ship[];
-	player: Player;
-}
-
-interface IMatch {
-	id: string;
-	firstPlayer: IPlayers;
-	secondPlayer: IPlayers;
-}
 
 const matchSlice = createSlice({
 	name: 'MATCH',
-	initialState: [] as IMatch[],
+	initialState: [] as GameDTO[],
 	reducers: {
-		addMatch: (state, action: Action<IMatch>) => {
+		addMatch: (state, action: Action<GameDTO>) => {
 			state.push(action.payload);
 		},
-		removeMatch: (state, action: Action<Pick<IMatch, 'id'>>) => {
+		removeMatch: (state, action: Action<string>) => {
 			return state.filter(
-				match => match.id !== action.payload.id);
+				match => match.id !== action.payload);
 		},
-		updateMatch: (state, action: Action<IMatch>) => {
+		updateMatch: (state, action: Action<GameDTO>) => {
 			return state.map(match => {
 				if (match.id === action.payload.id) {
 					return action.payload;
