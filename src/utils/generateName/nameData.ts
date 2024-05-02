@@ -68,8 +68,18 @@ export const nameData: Name[] = [
 		gender: Gender.Female
 	},
 	{
-		icon: 'ship',
-		name: 'Овца',
-		gender: Gender.Female
+		icon: 'dragon',
+		name: 'Дракон',
+		gender: Gender.Male
+	},
+	{
+		icon: 'deer',
+		name: 'Олень',
+		gender: Gender.Male
+	},
+	{
+		icon: 'cock',
+		name: 'Петух',
+		gender: Gender.Male
 	}
 ]
