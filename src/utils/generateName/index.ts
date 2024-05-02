@@ -12,7 +12,7 @@ export const generateName = () => {
 		gender
 	} = nameData[a];
 
-	const genderId = gender === Gender.male ? 0 : 1;
+	const genderId = gender === Gender.Male ? 0 : 1;
 	const description = descriptionData[b][genderId];
 
 	return {

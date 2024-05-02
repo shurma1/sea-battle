@@ -10,66 +10,66 @@ export const nameData: Name[] = [
 	{
 		icon: 'walrus',
 		name: 'Морж',
-		gender: Gender.male
+		gender: Gender.Male
 	},
 	{
 		icon: 'hawk',
 		name: 'Ястреб',
-		gender: Gender.male
+		gender: Gender.Male
 	},
 	{
 		icon: 'frog',
 		name: 'Лягушка',
-		gender: Gender.female
+		gender: Gender.Female
 	},
 	{
 		icon: 'crow',
 		name: 'ворона',
-		gender: Gender.female
+		gender: Gender.Female
 	},
 	{
 		icon: 'hyena',
 		name: 'Гиента',
-		gender: Gender.female
+		gender: Gender.Female
 	},
 	{
 		icon: 'whale',
 		name: 'Кит',
-		gender: Gender.male
+		gender: Gender.Male
 	},
 	{
 		icon: 'butterfly',
 		name: 'Мотылек',
-		gender: Gender.male
+		gender: Gender.Male
 	},
 	{
 		icon: 'bull',
 		name: 'Бык',
-		gender: Gender.male
+		gender: Gender.Male
 	},
 	{
 		icon: 'turkey',
 		name: 'Индейка',
-		gender: Gender.female
+		gender: Gender.Female
 	},
 	{
 		icon: 'beetle',
 		name: 'Жук',
-		gender: Gender.male
+		gender: Gender.Male
 	},
 	{
 		icon: 'crab',
 		name: 'Краб',
-		gender: Gender.male
+		gender: Gender.Male
 	},
 	{
 		icon: 'cobra',
 		name: 'Кобра',
-		gender: Gender.female
+		gender: Gender.Female
 	},
 	{
 		icon: 'ship',
 		name: 'Овца',
-		gender: Gender.female
+		gender: Gender.Female
 	}
 ]
